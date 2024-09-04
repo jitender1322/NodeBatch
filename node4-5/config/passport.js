@@ -1,0 +1,32 @@
+const passport = require("passport");
+
+const localSt = require("passport-local").Strategy
+
+const adminSchema = require("../model/adminSchema");
+
+passport.use("local", new localSt(
+    { usernameField: "email" },
+    async (email, password, done) => {
+        let adminData = await adminSchema.findOne({ email: email });
+        if (adminData) {
+            if (password == adminData.password) {
+                return done(null, adminData)
+            } else {
+                return done(null, false)
+            }
+        } else {
+            return done(null, false)
+        }
+    }
+))
+
+passport.serializeUser((user, done) => {
+    return done(null, user.id)
+})
+
+passport.deserializeUser(async (id, done) => {
+    let adminData = await adminSchema.findById(id);
+    adminData ? done(null, adminData) : done(null, false)
+})
+
+module.exports = passport;
