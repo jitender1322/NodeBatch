@@ -12,6 +12,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Matrix Template - The Ultimate Multipurpose admin template</title>
     <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/libs/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/libs/jquery-minicolors/jquery.minicolors.css">
+    <link rel="stylesheet" type="text/css"
+        href="assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/libs/quill/dist/quill.snow.css">
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,7 +64,7 @@
                     <div class="page-breadcrumb">
                         <div class="row">
                             <div class="col-12 d-flex no-block align-items-center">
-                                <h4 class="page-title">Invoice</h4>
+                                <h4 class="page-title">Change Password</h4>
                                 <div class="ml-auto text-right">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
@@ -82,67 +87,83 @@
                         <!-- Start Page Content -->
                         <!-- ============================================================== -->
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="card card-body printableArea">
-                                    <h3><b>
-                                            <%= locals.user.fname %>
-                                        </b> <span class="pull-right">
-                                            <%= locals.user.lname %>
-                                        </span></h3>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="pull-left">
-                                                <address>
-                                                    <h3> &nbsp;<b class="text-danger">
-                                                            <%= locals.user.email %>
-                                                        </b></h3>
-                                                    <p class="text-muted m-l-5">
-                                                        <br />
-                                                        <%= locals.user.company %>
-                                                            <br />
-                                                            <%= locals.user.mobail %>
-                                                                <br />
-                                                                <%= locals.user.message %>
-                                                    </p>
-                                                </address>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <form class="form-horizontal" method="post" action="/changePassword">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Change Password</h4>
+                                            <div class="form-group row">
+                                                <label for="fname"
+                                                    class="col-sm-3 text-right control-label col-form-label">Old
+                                                    Password</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="oldPass" id="fname"
+                                                        placeholder="Enter old password">
+                                                </div>
                                             </div>
+                                            <div class="form-group row">
+                                                <label for="lname"
+                                                    class="col-sm-3 text-right control-label col-form-label">New
+                                                    Password</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="newPass" id="lname"
+                                                        placeholder="Enter new password">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="lname"
+                                                    class="col-sm-3 text-right control-label col-form-label">
+                                                    Confirm Password</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="confirmPass"
+                                                        id="lname" placeholder="Enter confirm passwrod">
+                                                </div>
+                                            </div>
+
                                         </div>
 
-
+                                </div>
+                                <div class="border-top">
+                                    <div class="card-body">
+                                        <button type="submit" class="btn btn-primary">Change Password</button>
                                     </div>
                                 </div>
+                                </form>
                             </div>
+
                         </div>
 
-                        <!-- ============================================================== -->
-                        <!-- End PAge Content -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Right sidebar -->
-                        <!-- ============================================================== -->
-                        <!-- .right-sidebar -->
-                        <!-- ============================================================== -->
-                        <!-- End Right sidebar -->
-                        <!-- ============================================================== -->
                     </div>
+                    <!-- editor -->
+
                     <!-- ============================================================== -->
-                    <!-- End Container fluid  -->
+                    <!-- End PAge Content -->
                     <!-- ============================================================== -->
                     <!-- ============================================================== -->
-                    <!-- footer -->
+                    <!-- Right sidebar -->
                     <!-- ============================================================== -->
-                    <footer class="footer text-center">
-                        All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                            href="https://wrappixel.com">WrapPixel</a>.
-                    </footer>
+                    <!-- .right-sidebar -->
                     <!-- ============================================================== -->
-                    <!-- End footer -->
+                    <!-- End Right sidebar -->
                     <!-- ============================================================== -->
                 </div>
                 <!-- ============================================================== -->
-                <!-- End Page wrapper  -->
+                <!-- End Container fluid  -->
                 <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- footer -->
+                <!-- ============================================================== -->
+                <footer class="footer text-center">
+                    All Rights Reserved by Matrix-admin. Designed and Developed by <a
+                        href="https://wrappixel.com">WrapPixel</a>.
+                </footer>
+                <!-- ============================================================== -->
+                <!-- End footer -->
+                <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -163,6 +184,60 @@
     <script src="dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
+    <!-- This Page JS -->
+    <script src="assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="dist/js/pages/mask/mask.init.js"></script>
+    <script src="assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
+    <script src="assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
+    <script src="assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
+    <script src="assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
+    <script src="assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/libs/quill/dist/quill.min.js"></script>
+    <script>
+        //***********************************//
+        // For select 2
+        //***********************************//
+        $(".select2").select2();
+
+        /*colorpicker*/
+        $('.demo').each(function () {
+            //
+            // Dear reader, it's actually very easy to initialize MiniColors. For example:
+            //
+            //  $(selector).minicolors();
+            //
+            // The way I've done it below is just for the demo, so don't get confused
+            // by it. Also, data- attributes aren't supported at this time...they're
+            // only used for this demo.
+            //
+            $(this).minicolors({
+                control: $(this).attr('data-control') || 'hue',
+                position: $(this).attr('data-position') || 'bottom left',
+
+                change: function (value, opacity) {
+                    if (!value) return;
+                    if (opacity) value += ', ' + opacity;
+                    if (typeof console === 'object') {
+                        console.log(value);
+                    }
+                },
+                theme: 'bootstrap'
+            });
+
+        });
+        /*datwpicker*/
+        jQuery('.mydatepicker').datepicker();
+        jQuery('#datepicker-autoclose').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+    </script>
 </body>
 
 </html>
