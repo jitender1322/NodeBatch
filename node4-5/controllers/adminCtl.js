@@ -43,7 +43,7 @@ module.exports.changePassword = async (req, res) => {
 
             if (req.body.newPass == req.body.confirmPass) {
                 console.log(id);
-                let adminData = await admin.findByIdAndUpdate(id, { password: req.body.newpass })
+                let adminData = await admin.findByIdAndUpdate(id, { password: req.body.newPass })
                 adminData ? res.redirect("/logout") : console.log("something went wrong");
             } else {
                 console.log("new password and confirm password are different");
@@ -56,4 +56,8 @@ module.exports.changePassword = async (req, res) => {
     } else {
         console.log("old password is wrong");
     }
+}
+
+module.exports.forgetPassword = (req, res) => {
+    return res.render("forgetPass")
 }
