@@ -1,4 +1,5 @@
 const admin = require("../model/adminSchema")
+const nodemailer = require("../config/mailer")
 
 module.exports.login = (req, res) => {
     res.render("login")
@@ -60,4 +61,38 @@ module.exports.changePassword = async (req, res) => {
 
 module.exports.forgetPassword = (req, res) => {
     return res.render("forgetPass")
+}
+module.exports.lostPass = async (req, res) => {
+    let user = await admin.findOne({ email: req.body.email })
+    if (!user) {
+        return res.redirect("/forgetPass")
+    }
+
+    let otp = Math.floor(100000 + Math.random() * 900000);
+
+    nodemailer.sendOtp(req.body.email, otp);
+
+    req.session.otp = otp;
+    req.session.adminId = user.id
+
+    res.render("newPass")
+    console.log("otp sended");
+}
+
+module.exports.checkNewPassword = async (req, res) => {
+    let otp = req.session.otp
+    let adminId = req.session.adminId
+
+    if (otp == req.body.otp) {
+        if (req.body.newPass == req.body.confirmPass) {
+            await admin.findByIdAndUpdate(adminId, { password: req.body.newPass })
+            res.redirect("/");
+        } else {
+            res.redirect("/forgetPass");
+            console.log("password must be same");
+        }
+    } else {
+        res.redirect("/forgetPass")
+        console.log("otp is wrong");
+    }
 }

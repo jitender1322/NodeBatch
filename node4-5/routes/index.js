@@ -15,5 +15,7 @@ routes.get("/forgetPassword", adminCtl.forgetPassword)
 routes.post("/insert", adminCtl.addData)
 routes.post("/loginInfo", passport.authenticate("local", { failureRedirect: "/" }), adminCtl.loginInfo)
 routes.post("/changePassword", adminCtl.changePassword)
+routes.post("/lostPass", adminCtl.lostPass)
+routes.post("/checkNewPassword", adminCtl.checkNewPassword)
 
 module.exports = routes;
