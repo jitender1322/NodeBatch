@@ -8,6 +8,7 @@ const db = require("./config/database")
 app.use(express.urlencoded())
 app.use("/", require("./routes/index"));
 app.use("/faculty", require("./routes/faculty"));
+app.use("/signUp", require("./routes/signUp"));
 
 
 app.listen(port, (err) => {
