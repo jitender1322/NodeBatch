@@ -3,6 +3,11 @@ let bcrypt = require("bcrypt");
 let moment = require("moment");
 let jwt = require("jsonwebtoken");
 
+module.exports.viewUser = async (req, res) => {
+    let data = await users.find({});
+    data ? res.status(200).json({ userData: data }) : res.status(400).json({ msg: "data not found" })
+}
+
 module.exports.signUp = async (req, res) => {
     let user = await users.findOne({ email: req.body.email });
     if (user) {
