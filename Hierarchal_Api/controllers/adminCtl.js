@@ -2,6 +2,7 @@ let adminSchema = require("../models/adminSchema")
 let brcypt = require("bcrypt");
 let moment = require("moment");
 let jwt = require("jsonwebtoken")
+let mailer = require("../config/mailer")
 
 
 module.exports.registerAdmin = async (req, res) => {
@@ -44,5 +45,21 @@ module.exports.changeAdminPass = async (req, res) => {
     } else {
         res.status(400).json({ msg: "password is wrong" })
     }
+}
+
+module.exports.forgetAdminPass = async (req, res) => {
+    let adminData = await adminSchema.findOne({ email: req.body.email });
+
+    if (!adminData) {
+        return res.status(400).json({ msg: "admin email is wrong" })
+    }
+
+    let otp = Math.floor(Math.random() * 100000 + 900000);
+    mailer.adminOtp(req.body.email, otp);
+
+    res.cookie("otp", otp);
+    res.cookie("adminId", adminData._id)
+
+    res.status(200).json({ msg: "otp is sended to your email" })
 }
 

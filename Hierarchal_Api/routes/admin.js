@@ -7,5 +7,6 @@ route.post("/registerAdmin", adminCtl.registerAdmin);
 route.post("/loginAdmin", adminCtl.loginAdmin);
 route.get("/viewAdmin", auth, adminCtl.viewAdmin);
 route.post("/changeAdminPass", auth, adminCtl.changeAdminPass);
+route.post("/forgetAdminPass", adminCtl.forgetAdminPass);
 
 module.exports = route

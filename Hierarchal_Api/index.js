@@ -3,8 +3,10 @@ const port = 9001;
 
 const app = express();
 const db = require("./config/db")
+const cookieParser = require("cookie-parser");
 
 app.use(express.urlencoded())
+app.use(cookieParser());
 
 app.use("/", require("./routes/index"))
 
